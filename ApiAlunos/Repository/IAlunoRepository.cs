@@ -6,7 +6,7 @@ namespace ApiAlunos.Repository
     public interface IAlunoRepository
     {
         IEnumerable<Aluno> GetAll();
-        Aluno find(string ra);
-        Aluno login(string ra, string senha);
+        Aluno Find(string ra);
+        Aluno Login(string ra, string senha);
     }
 }

@@ -12,7 +12,7 @@ namespace ApiAlunos.Repository
         {
             _context = context;
         }
-        public Aluno find(string ra)
+        public Aluno Find(string ra)
         {
             return _context.Aluno.FirstOrDefault(x => x.RA == ra);
         }
@@ -22,7 +22,7 @@ namespace ApiAlunos.Repository
             return _context.Aluno.ToList();
         }
 
-        public Aluno login(string ra, string senha)
+        public Aluno Login(string ra, string senha)
         {
             return _context.Aluno.FirstOrDefault(x => x.RA == ra && x.Senha == senha);
         }
