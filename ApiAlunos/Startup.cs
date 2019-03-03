@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
+using ApiAlunos.Repository;
 
 namespace ApiAlunos
 {
@@ -30,6 +31,7 @@ namespace ApiAlunos
             services.AddDbContext<AlunoDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("MySqlConnetionString"))
             );
+            services.AddTransient<IAlunoRepository, AlunoRepository>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
