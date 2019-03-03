@@ -20,7 +20,7 @@ namespace ApiAlunos.Controllers
             return _alunoRepository.GetAll();
         }
 
-        [HttpGet("{ra}", Name="GetAluno")]
+        [HttpGet("ra/{ra}", Name="GetAluno")]
         public IActionResult GetByRa(string ra)
         {
             var aluno = _alunoRepository.Find(ra);
@@ -28,5 +28,14 @@ namespace ApiAlunos.Controllers
                 return NotFound();
             return new ObjectResult(aluno);
         }
+
+       [HttpPost("login")]
+       public IActionResult Login([FromBody] Aluno oAluno)
+       {
+           var aluno = _alunoRepository.Login(oAluno.RA, oAluno.Senha, oAluno.Instituicao);
+           if(aluno == null)
+                return BadRequest();
+            return new ObjectResult(aluno);
+       }
     }
 }
