@@ -1,3 +1,6 @@
+Drop database AniFood;
+CREATE DATABASE IF NOT EXISTS AniFood;
+USE AniFood;
 CREATE TABLE usuario (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(60) NULL,
@@ -10,12 +13,15 @@ CREATE TABLE usuario (
 
 CREATE TABLE categoria (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  nome INTEGER UNSIGNED NULL,
+  nome VARCHAR(60) NULL,
   statusCategoria CHAR NULL,
   dataInsercao DATE NULL,
   dataAtualizacao DATE NULL,
   PRIMARY KEY(id)
 );
+
+insert into categoria values (null, 'Salgados','d',null, null);
+select * from categoria;
 
 CREATE TABLE aluno (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
