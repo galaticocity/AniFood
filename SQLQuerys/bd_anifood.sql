@@ -1,7 +1,8 @@
+
 Drop database AniFood;
 CREATE DATABASE IF NOT EXISTS AniFood;
 USE AniFood;
-CREATE TABLE usuario (
+CREATE TABLE Usuario (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(60) NULL,
   statusUsuario CHAR NULL,
@@ -11,7 +12,7 @@ CREATE TABLE usuario (
   PRIMARY KEY(id)
 );
 
-CREATE TABLE categoria (
+CREATE TABLE Categoria (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(60) NULL,
   statusCategoria CHAR NULL,
@@ -20,8 +21,8 @@ CREATE TABLE categoria (
   PRIMARY KEY(id)
 );
 
-insert into categoria values (null, 'Salgados','d',null, null);
-select * from categoria;
+insert into Categoria values (null, 'Salgados','d',now(), now());
+select * from Categoria;
 
 CREATE TABLE aluno (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -46,7 +47,7 @@ CREATE TABLE produto (
   PRIMARY KEY(id),
   INDEX produto_FKIndex1(idCategoria),
   FOREIGN KEY(idCategoria)
-    REFERENCES categoria(id)
+    REFERENCES Categoria(id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
