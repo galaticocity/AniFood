@@ -14,7 +14,7 @@ namespace ApiAniFood.Repository.Interfaces
         IEnumerable<Produto> FindByStatus(char status);
         void Add (Produto produto);
         void Update (Produto produto);
-        Produto Remove (string nome);
+        void Remove (string nome);
         void RemoveById (int id);
 
     }

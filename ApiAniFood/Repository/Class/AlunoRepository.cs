@@ -13,14 +13,16 @@ namespace ApiAniFood.Repository.Class
         {
             _context = context;
         }
-        public Aluno Add(Usuario usuario)
+
+        public void Add(Aluno aluno)
         {
-            throw new System.NotImplementedException();
+            _context.Aluno.Add(aluno);
+            _context.SaveChanges();
         }
 
         public Aluno Find(string ra)
         {
-            throw new System.NotImplementedException();
+            return _context.Aluno.FirstOrDefault(x => x.RA == ra);
         }
 
         public Aluno Login(string ra, string senha)
@@ -28,14 +30,17 @@ namespace ApiAniFood.Repository.Class
             return _context.Aluno.FirstOrDefault(x => x.RA == ra && x.Senha == senha);
         }
 
-        public Aluno Remove(int ra)
+        public void Remove(string ra)
         {
-            throw new System.NotImplementedException();
+            var aluno = _context.Aluno.First(x => x.RA == ra);
+            _context.Aluno.Remove(aluno);
+            _context.SaveChanges();
         }
 
-        public Aluno Update(Usuario usuario)
+        public void Update(Aluno aluno)
         {
-            throw new System.NotImplementedException();
+            _context.Aluno.Update(aluno);
+            _context.SaveChanges();
         }
     }
 }

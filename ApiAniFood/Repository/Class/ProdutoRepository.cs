@@ -32,7 +32,7 @@ namespace ApiAniFood.Repository.Class
 
         public IEnumerable<Produto> FindByStatus(char status)
         {
-            throw new System.NotImplementedException();
+            return _context.Produto.Where(x => x.StatusProduto == status);
         }
 
         public IEnumerable<Produto> FindByValor(double valor)
@@ -42,12 +42,12 @@ namespace ApiAniFood.Repository.Class
 
         public IEnumerable<Produto> FindByValorGraterThan(double valor)
         {
-            throw new System.NotImplementedException();
+            return _context.Produto.Where(x => x.Valor >= valor).ToList();
         }
 
         public IEnumerable<Produto> FindByValorLessThan(double valor)
         {
-            throw new System.NotImplementedException();
+            return _context.Produto.Where(x => x.Valor <= valor).ToList();
         }
 
         public IEnumerable<Produto> GetAll()
@@ -55,19 +55,24 @@ namespace ApiAniFood.Repository.Class
             return _context.Produto.ToList();
         }
 
-        public Produto Remove(string nome)
+        public void Remove(string nome)
         {
-            throw new System.NotImplementedException();
+            var produto = _context.Produto.FirstOrDefault(x => x.Nome == nome);
+            _context.Produto.Remove(produto);
+            _context.SaveChanges(); 
         }
 
         public void RemoveById(int id)
         {
-            throw new System.NotImplementedException();
+            var produto = _context.Produto.FirstOrDefault(x => x.ID == id);
+            _context.Produto.Remove(produto);
+            _context.SaveChanges();    
         }
 
         public void Update(Produto produto)
         {
-            throw new System.NotImplementedException();
+            _context.Produto.Update(produto);
+            _context.SaveChanges(); 
         }
     }
 }
