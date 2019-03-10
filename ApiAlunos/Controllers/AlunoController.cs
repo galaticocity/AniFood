@@ -14,6 +14,11 @@ namespace ApiAlunos.Controllers
             _alunoRepository = alunoRepository;
         }
         
+        [HttpGet]
+        public IActionResult Teste(){
+            return StatusCode(200);
+        }
+
         /*
         [HttpGet]
         public IEnumerable<Aluno> GetAll()

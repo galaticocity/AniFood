@@ -38,9 +38,13 @@ namespace ApiAniFood
             services.AddDbContext<AlunoDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
             );
+            services.AddDbContext<ProdutoDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
+            );
 
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IAlunoRepository, AlunoRepository>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
 
             //adicionar autenticação toke
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

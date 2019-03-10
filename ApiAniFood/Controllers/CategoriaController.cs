@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAniFood.Controllers
 {
-    [Route("categoria/[Controller]")]
+    [Route("anifood/[Controller]")]
     public class CategoriaController : Controller
     {
         private readonly ICategoriaRepository _categoriaRepositoy;

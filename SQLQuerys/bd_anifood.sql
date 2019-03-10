@@ -56,6 +56,9 @@ CREATE TABLE Produto (
       ON UPDATE NO ACTION
 );
 
+insert into Produto values (null, 1,'Coxinha Ligth', 2.50, 't', now(), now());
+select * from Produto;
+
 CREATE TABLE Pedido (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   idAluno INTEGER UNSIGNED NOT NULL,

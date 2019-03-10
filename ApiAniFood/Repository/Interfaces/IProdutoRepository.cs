@@ -6,14 +6,16 @@ namespace ApiAniFood.Repository.Interfaces
     public interface IProdutoRepository
     {
         IEnumerable<Produto> GetAll();
-        Produto Find (string nome);
+        IEnumerable<Produto> Find(string nome);
         Produto FindById (int id);
-        IEnumerable<Produto> FindByValor(decimal valor);
+        IEnumerable<Produto> FindByValor(double valor);
+        IEnumerable<Produto> FindByValorLessThan(double valor);
+        IEnumerable<Produto> FindByValorGraterThan(double valor);
         IEnumerable<Produto> FindByStatus(char status);
-        Produto Add (Produto produto);
-        Produto Update (Produto produto);
+        void Add (Produto produto);
+        void Update (Produto produto);
         Produto Remove (string nome);
-        Produto RemoveById (int id);
+        void RemoveById (int id);
 
     }
 }
