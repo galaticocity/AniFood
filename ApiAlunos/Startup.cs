@@ -23,6 +23,7 @@ namespace ApiAlunos
             Configuration = configuration;
         }
 
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -32,6 +33,10 @@ namespace ApiAlunos
                 options.UseMySql(Configuration.GetConnectionString("MySqlConnetionString"))
             );
             services.AddTransient<IAlunoRepository, AlunoRepository>();
+            
+                        //permite requisições ORIGIN
+           
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

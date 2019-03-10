@@ -12,6 +12,9 @@ CREATE TABLE Usuario (
   PRIMARY KEY(id)
 );
 
+insert into Usuario values (null, 'Admin','t',sha1('1234'),now(), now());
+select * from Usuario;
+
 CREATE TABLE Categoria (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(60) NULL,

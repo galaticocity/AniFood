@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using ApiAlunos.Models;
 using ApiAlunos.Repository;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiAlunos.Controllers
 {
-    [Route("aluno/[Controller]")]
+    [Route("apialuno/[Controller]")]
     public class AlunoController : Controller
     {
         private readonly IAlunoRepository _alunoRepository;
@@ -15,6 +16,7 @@ namespace ApiAlunos.Controllers
         }
         
         [HttpGet]
+        [EnableCors]
         public IActionResult Teste(){
             return StatusCode(200);
         }

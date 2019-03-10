@@ -5,12 +5,13 @@ namespace ApiAniFood.Repository.Interfaces
 {
     public interface IUsuarioRepository
     {
+        IEnumerable<Usuario> GetAll();
          Usuario Find(string nome);
          Usuario FindById(int id);
          IEnumerable<Usuario> FindByStatus(char status);
-         Usuario Add(Usuario usuario);
-         Usuario Update(Usuario usuario);
-         Usuario Remove(string nome);
-         Usuario RemoveById(int id);
+         void Add(Usuario usuario);
+         void Update(Usuario usuario);
+         void Remove(string nome);
+         void RemoveById(int id);
     }
 }

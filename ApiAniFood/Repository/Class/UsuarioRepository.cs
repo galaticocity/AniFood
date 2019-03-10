@@ -1,44 +1,62 @@
 using System.Collections.Generic;
+using System.Linq;
 using ApiAniFood.Models.Class;
+using ApiAniFood.Models.Context;
 using ApiAniFood.Repository.Interfaces;
 
 namespace ApiAniFood.Repository.Class
 {
     public class UsuarioRepository : IUsuarioRepository
     {
-        public Usuario Add(Usuario usuario)
+        private readonly UsuarioDbContext _context;
+        public UsuarioRepository(UsuarioDbContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+        }
+        public void Add(Usuario usuario)
+        {
+            _context.Usuario.Add(usuario);
+            _context.SaveChanges();
         }
 
         public Usuario Find(string nome)
         {
-            throw new System.NotImplementedException();
+            return _context.Usuario.FirstOrDefault(x => x.Nome == nome);
         }
 
         public Usuario FindById(int id)
         {
-            throw new System.NotImplementedException();
+            return _context.Usuario.FirstOrDefault(x => x.ID == id);
         }
 
         public IEnumerable<Usuario> FindByStatus(char status)
         {
-            throw new System.NotImplementedException();
+            return _context.Usuario.Where(x => x.StatusUsuario == status);
         }
 
-        public Usuario Remove(string nome)
+        public IEnumerable<Usuario> GetAll()
         {
-            throw new System.NotImplementedException();
+            return _context.Usuario.ToList();
         }
 
-        public Usuario RemoveById(int id)
+        public void Remove(string nome)
         {
-            throw new System.NotImplementedException();
+            var usuario = _context.Usuario.First(x => x.Nome == nome);
+            _context.Usuario.Remove(usuario);
+            _context.SaveChanges();
         }
 
-        public Usuario Update(Usuario usuario)
+        public void RemoveById(int id)
         {
-            throw new System.NotImplementedException();
+            var usuario = _context.Usuario.First(x => x.ID == id);
+            _context.Usuario.Remove(usuario);
+            _context.SaveChanges();
+        }
+
+        public void Update(Usuario usuario)
+        {
+            _context.Usuario.Update(usuario);
+            _context.SaveChanges();
         }
     }
 }

@@ -29,6 +29,7 @@ namespace ApiAniFood
 
         public IConfiguration Configuration { get; }
 
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -45,8 +46,9 @@ namespace ApiAniFood
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddTransient<IAlunoRepository, AlunoRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
 
-            //adicionar autenticação toke
+            //adicionar autenticação token
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>
                 {
