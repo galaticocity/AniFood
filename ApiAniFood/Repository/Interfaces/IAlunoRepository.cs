@@ -8,5 +8,7 @@ namespace ApiAniFood.Repository.Interfaces
          Aluno Add(Usuario usuario);
          Aluno Update(Usuario usuario);
          Aluno Remove(int ra);
+
+         Aluno Login(string ra, string senha);
     }
 }

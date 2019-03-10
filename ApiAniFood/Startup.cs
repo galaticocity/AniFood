@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using ApiAniFood.Models.Context;
 using ApiAniFood.Repository.Class;
 using ApiAniFood.Repository.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +16,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ApiAniFood
 {
@@ -32,9 +35,48 @@ namespace ApiAniFood
             services.AddDbContext<CategoriaDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
             );
+            services.AddDbContext<AlunoDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
+            );
+
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IAlunoRepository, AlunoRepository>();
+
+            //adicionar autenticação toke
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = "anifood",
+                        ValidAudience = "anifood",
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            Encoding.UTF8.GetBytes(Configuration["SecurityKey"])
+                        )
+                    };
+
+                    options.Events = new JwtBearerEvents
+                    {
+                        OnAuthenticationFailed = context =>
+                        {
+                            Console.WriteLine($"Token Inválido [{context.Exception.Message}]");
+                            return Task.CompletedTask;
+                        },
+                        OnTokenValidated = context =>
+                        {
+                            Console.WriteLine($"Token válido [{context.SecurityToken}]");
+                            return Task.CompletedTask;
+                        }
+                    };
+                }
+            );            
             
+            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +91,7 @@ namespace ApiAniFood
                 app.UseHsts();
             }
 
+            app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }

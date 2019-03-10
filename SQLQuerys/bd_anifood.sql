@@ -1,5 +1,5 @@
 
-Drop database AniFood;
+Drop database if exists AniFood;
 CREATE DATABASE IF NOT EXISTS AniFood;
 USE AniFood;
 CREATE TABLE Usuario (
@@ -24,9 +24,10 @@ CREATE TABLE Categoria (
 insert into Categoria values (null, 'Salgados','d',now(), now());
 select * from Categoria;
 
-CREATE TABLE aluno (
+CREATE TABLE Aluno (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nome VARCHAR(60) NULL,
+  instituicao VARCHAR(60) NULL,
   dataNascimento DATE NULL,
   ra VARCHAR(20) NULL,
   statusAluno CHAR NULL,
@@ -36,7 +37,10 @@ CREATE TABLE aluno (
   PRIMARY KEY(id)
 );
 
-CREATE TABLE produto (
+insert into Aluno values(null, 'Fernando Gonçalves','UNA', null, '10203040', 't', sha1('1234'), null, now());
+select * from Aluno;
+
+CREATE TABLE Produto (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   idCategoria INTEGER UNSIGNED NOT NULL,
   nome VARCHAR(60) NULL,
@@ -52,7 +56,7 @@ CREATE TABLE produto (
       ON UPDATE NO ACTION
 );
 
-CREATE TABLE pedido (
+CREATE TABLE Pedido (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   idAluno INTEGER UNSIGNED NOT NULL,
   statusPedido CHAR NULL,
@@ -62,12 +66,12 @@ CREATE TABLE pedido (
   PRIMARY KEY(id),
   INDEX pedido_FKIndex1(idAluno),
   FOREIGN KEY(idAluno)
-    REFERENCES aluno(id)
+    REFERENCES Aluno(id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
 
-CREATE TABLE pedido_produto (
+CREATE TABLE Pedido_produto (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   idProduto INTEGER UNSIGNED NOT NULL,
   idPedido INTEGER UNSIGNED NOT NULL,
@@ -79,13 +83,15 @@ CREATE TABLE pedido_produto (
   INDEX pedido_produto_FKIndex1(idPedido),
   INDEX pedido_produto_FKIndex2(idProduto),
   FOREIGN KEY(idPedido)
-    REFERENCES pedido(id)
+    REFERENCES Pedido(id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION,
   FOREIGN KEY(idProduto)
-    REFERENCES produto(id)
+    REFERENCES Produto(id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
+
+
 
 

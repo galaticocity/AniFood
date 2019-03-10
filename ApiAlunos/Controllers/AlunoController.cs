@@ -13,7 +13,8 @@ namespace ApiAlunos.Controllers
         {
             _alunoRepository = alunoRepository;
         }
-
+        
+        /*
         [HttpGet]
         public IEnumerable<Aluno> GetAll()
         {
@@ -28,6 +29,7 @@ namespace ApiAlunos.Controllers
                 return NotFound();
             return new ObjectResult(aluno);
         }
+        */
 
        [HttpPost("login")]
        public IActionResult Login([FromBody] Aluno oAluno)
