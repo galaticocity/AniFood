@@ -25,6 +25,8 @@ namespace ApiAniFood.Controllers
         public IEnumerable<Produto> GetAll()
         {
             return _produtoRepository.GetAll();
-        }   
+        }
+        
+           
     }
 }
