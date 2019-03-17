@@ -12,6 +12,9 @@ CREATE TABLE Instituicao (
   PRIMARY KEY(id)
 );
 
+insert into Instituicao values(null, 'UNA', 'n', now(), now());
+select * from Instituicao;
+
 CREATE TABLE Categoria (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   nome INTEGER UNSIGNED NULL,
@@ -20,6 +23,11 @@ CREATE TABLE Categoria (
   dataAtualizacao DATETIME NULL,
   PRIMARY KEY(id)
 );
+
+insert into Categoria values (null, 'Salgados','d',now(), now());
+select * from Categoria;
+
+
 
 CREATE TABLE Aluno (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -32,6 +40,9 @@ CREATE TABLE Aluno (
   dataAtualizacao DATETIME NULL,
   PRIMARY KEY(id)
 );
+
+insert into Aluno values(null, 'Fernando Gonçalves', now(), '10203040', 't', sha1('1234'), null, now());
+select * from Aluno;
 
 CREATE TABLE Pedido (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -47,6 +58,9 @@ CREATE TABLE Pedido (
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
+
+insert into Pedido values (null, 1, 't',now(), now(), now());
+select * from Pedido;
 
 CREATE TABLE Loja (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -65,11 +79,15 @@ CREATE TABLE Loja (
       ON UPDATE NO ACTION
 );
 
+insert into Loja values (null, 1, 'Coxinha Da Una', 'Aqui é mais legal','barro preto', 'n', now(), now());
+select * from Loja;
+
 CREATE TABLE Produto (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   idLoja INTEGER UNSIGNED NOT NULL,
   idCategoria INTEGER UNSIGNED NOT NULL,
   nome VARCHAR(60) NULL,
+  descricao VARCHAR(500) NULL,
   qtd INTEGER UNSIGNED NULL,
   valor DOUBLE NULL,
   statusProduto CHAR NULL,
@@ -87,6 +105,9 @@ CREATE TABLE Produto (
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
 );
+
+insert into Produto values (null, 1, 1, 'Coxinha Pastel','Gosto de pastel e sabor de catupiry', 30, 2.50, 't', now(), now());
+select * from Produto;
 
 CREATE TABLE Pedido_produto (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -109,6 +130,9 @@ CREATE TABLE Pedido_produto (
       ON UPDATE NO ACTION
 );
 
+insert into Pedido_produto value(null, 1, 1, 5, 't', now(), now());
+select * from Pedido_produto;
+
 CREATE TABLE Usuario (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   idLoja INTEGER UNSIGNED NOT NULL,
@@ -125,25 +149,5 @@ CREATE TABLE Usuario (
       ON UPDATE NO ACTION
 );
 
-
-insert into Usuario values (null, 'Admin','t',sha1('1234'),now(), now());
+insert into Usuario values (null, 1, 'Admin','t',sha1('1234'),now(), now());
 select * from Usuario;
-
-insert into Categoria values (null, 'Salgados','d',now(), now());
-select * from Categoria;
-
-insert into Aluno values(null, 'Fernando Gonçalves','UNA', null, '10203040', 't', sha1('1234'), null, now());
-select * from Aluno;
-
-insert into Produto values (null, 1,'Coxinha Ligth', 2.50, 't', now(), now());
-select * from Produto;
-
-insert into Pedido values (null, 1, 't',now(), now(), now());
-select * from Pedido;
-
-insert into Pedido_produto value(null, 1, 1, 5, 't', now(), now());
-select * from Pedido_produto;
-
-
-
-
