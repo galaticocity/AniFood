@@ -80,7 +80,7 @@ CREATE TABLE Loja (
 );
 
 insert into Loja values (null, 1, 'Coxinha Da Una', 'Aqui é mais legal','barro preto', 'n', now(), now());
-insert into Loja values (null, 1, 'Coxinha Da Una', 'Aqui é mais legal','barro preto', 'n', now(), now());
+insert into Loja values (null, 1, 'A negado B negado', 'Aqui é 0 ou 1','barro preto', 'n', now(), now());
 
 select * from Loja;
 
