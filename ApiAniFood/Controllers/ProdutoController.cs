@@ -21,12 +21,26 @@ namespace ApiAniFood.Controllers
             return _produtoRepository.Find(nome);           
         }
 
+        [HttpGet("{id}", Name="GetProdutoById")]
+        public IActionResult FindByID(int id)
+        {
+            var produto = _produtoRepository.FindById(id);
+            if(produto == null)
+                return null;
+            return new ObjectResult(produto);
+        }
+
         [HttpGet]
         public IEnumerable<Produto> GetAll()
         {
             return _produtoRepository.GetAll();
         }
         
+        [HttpGet("{id}/loja", Name="GetProdutoByLanchoneteId")]
+        public IEnumerable<Produto> ProdutoPorLanchoneteId(int id)
+        {
+            return _produtoRepository.FindProdutoByLanchoneteId(id);
+        }
            
     }
 }

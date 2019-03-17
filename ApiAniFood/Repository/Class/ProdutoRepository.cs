@@ -50,6 +50,11 @@ namespace ApiAniFood.Repository.Class
             return _context.Produto.Where(x => x.Valor <= valor).ToList();
         }
 
+        public IEnumerable<Produto> FindProdutoByLanchoneteId(int id)
+        {
+            return _context.Produto.Where(x => x.IdLoja == id);
+        }
+
         public IEnumerable<Produto> GetAll()
         {
             return _context.Produto.ToList();

@@ -12,6 +12,7 @@ namespace ApiAniFood.Repository.Interfaces
         IEnumerable<Produto> FindByValorLessThan(double valor);
         IEnumerable<Produto> FindByValorGraterThan(double valor);
         IEnumerable<Produto> FindByStatus(char status);
+        IEnumerable<Produto> FindProdutoByLanchoneteId(int id);
         void Add (Produto produto);
         void Update (Produto produto);
         void Remove (string nome);

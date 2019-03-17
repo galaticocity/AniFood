@@ -80,6 +80,8 @@ CREATE TABLE Loja (
 );
 
 insert into Loja values (null, 1, 'Coxinha Da Una', 'Aqui é mais legal','barro preto', 'n', now(), now());
+insert into Loja values (null, 1, 'Coxinha Da Una', 'Aqui é mais legal','barro preto', 'n', now(), now());
+
 select * from Loja;
 
 CREATE TABLE Produto (
@@ -107,6 +109,8 @@ CREATE TABLE Produto (
 );
 
 insert into Produto values (null, 1, 1, 'Coxinha Pastel','Gosto de pastel e sabor de catupiry', 30, 2.50, 't', now(), now());
+insert into Produto values (null, 2, 1, 'Empada','Empadinha ', 30, 2.50, 't', now(), now());
+
 select * from Produto;
 
 CREATE TABLE Pedido_produto (
