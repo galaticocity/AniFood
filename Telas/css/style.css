@@ -1,8 +1,30 @@
 
+html,body{
+    width: 100%;
+    height: 92%;
+}
 body{
     font-family: 'Open Sans',Arial,sans-serif;
-    height: 100%;
 }
+
+
+.tabUser li:hover, .product-basket-info:hover, .quantity-choose, .btn-add-basket, 
+.logo-lunch-circle, .heart-favority-alternate, .entrega-details {
+/* nao selecionar texto */
+
+    -webkit-touch-callout: none;  /* iPhone OS, Safari */
+    -webkit-user-select: none;    /* Chrome, Safari 3 */
+    -khtml-user-select: none;     /* Safari 2 */
+    -moz-user-select: none;       /* Firefox */
+    -ms-user-select: none;        /* IE10+ */
+    user-select: none;            /* Possível implementação no futuro */
+    /* cursor: default; */
+}
+
+.container{
+    height: auto;
+}
+
 .navbar-brand{
     position: absolute;
     margin: 0  0 0 8%;
@@ -12,12 +34,11 @@ body{
     float: left;
     margin: 10px 0 0 8% ;
     cursor: pointer;
-
+    
 }
 
 
-.navbar li{
-}
+
 .profile{
     cursor: pointer;
 }
@@ -29,7 +50,7 @@ body{
 }
 li{
     list-style-type: none;
-
+    
 }
 
 
@@ -37,11 +58,11 @@ li{
     margin-bottom: 0;
     width: 100%;
     background: #620069;
-
+    
     
 }
 .tabUser{
-    background: #aaam;
+    background: #aaa;
     width: 100%;
     
     
@@ -56,45 +77,48 @@ li{
     font-size: 16px;
     border: none;
     cursor: pointer;
-  }
-  
-  .dropdown {
+}
+
+.dropdown {
     position: relative;
     display: inline-block;
-  }
-  
-  .dropdown-content {
+}
+
+.dropdown-profile {
     display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
     text-align: left;
     border-radius: 10px;
     right: 1px;
     z-index: 10;
-  }
-  
-  .dropdown-content a {
+}
+
+.dropdown-profile a {
     color: black;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  
-  .dropdown-content a:hover {
-      background-color: #f1f1f1;
-      border-radius: 10px;
+}
 
-    }
-  
-  .dropdown:hover .dropdown-content {
+.dropdown-profile a:hover {
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    
+}
+
+.dropdown-profile i{
+    padding: 0 12px 0 0;
+}
+
+.dropdown:hover .dropdown-profile {
     display: block;
-  }
-  
+}
 
-  /****** end dropdown *****/
+
+/****** end dropdown *****/
 
 .ProfileUser{
     width: 100%;
@@ -119,12 +143,7 @@ li{
     background: rgb(185, 183, 183);
     opacity: 0.6;
     color: aliceblue;
-    -webkit-touch-callout: none;  /* iPhone OS, Safari */
-    -webkit-user-select: none;    /* Chrome, Safari 3 */
-    -khtml-user-select: none;     /* Safari 2 */
-    -moz-user-select: none;       /* Firefox */
-    -ms-user-select: none;        /* IE10+ */
-    user-select: none;   
+ 
 }
 
 .dropdown img{
@@ -145,7 +164,6 @@ li{
 }
 
 ul .name{
-    vertical-align: middle;
     position: relative;
     padding: 015px 0px 0px 0px;
     display: block;
@@ -179,17 +197,15 @@ ul .name{
 }
 
 .card-footer{
-    position: inherit;
     color: White;
     bottom:0;
     width:100%;
     float: right;
-    margin-top: 10em;
-
+    
 }
 
 
-/******** Login ******/
+/*********************************** Login *******************************************/
 
 
 
@@ -230,7 +246,7 @@ select{
 }
 
 .main-div {
-   
+    
     margin: 0px auto 0 auto;
     padding: 20px;
 }
@@ -272,8 +288,8 @@ select, input[type=number]::-webkit-inner-spin-button {
     text-align:center;
 }
 select, input[type=number] { 
-   -moz-appearance: textfield;
-   appearance: textfield;
+    -moz-appearance: textfield;
+    appearance: textfield;
 }
 
 .form-group-login option{
@@ -288,24 +304,25 @@ select, input[type=number] {
 /***************** Tela sobrepor *****************/
 
 .overlap{
-    height: auto;
-    z-index: 9;
+    height: 90%;
+    z-index: 2;
     background: white;
-    position: absolute;
+    position: fixed;
     margin: -41px 0 0 0;
     width: 95%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 0 0 50px;
+    top: 106px;
 
     
 }
-.overlapR{
-    height: auto;
-    z-index: 9;
-    background: white;
-    position: absolute;
-    margin: -41px 0 0 0;
-    width: 95%;
-    animation-name: offOverlap;
-    animation-duration: 1s;
+.produtos-lanchonete{
+    position: relative;
+    height: 76%;
+    overflow: auto;
+    display: block;
+    padding: 0 20px 0 20px;
 }
 
 .nav-desfoque{
@@ -331,16 +348,28 @@ select, input[type=number] {
     transform: translate(-50%, -50%);
     margin-top: 70px;
 }
-#heart-favority{
-    margin-top: 24px;
-    color: white;
+.heart-favority{
+    margin-top: 25px;
     position: absolute;
     left: 90%;
+    color: hidden;
     font-size: 20px;
+    font-stretch: expanded;
     cursor: pointer;
     animation-duration: 1.5s;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: white;
+    -webkit-text-fill-color: transparent;  
+    animation-name: heartN;
+    
+    
+}
+.heart-favority-alternate{
+    -webkit-text-fill-color: white;  
+    animation-name: heartA;
 
 }
+
 .overlap-off{
     margin-top: 26px;
     color: white;
@@ -349,7 +378,30 @@ select, input[type=number] {
     font-size: 25px;
     cursor: pointer;
     animation-duration: 1.5s;
+    
+}
+.legenda{
+    padding: 0 0 0 10px;
+    font-weight: bold;
+    font-size: 18px;
+    border: 1px solid; /* As 4 bordas sólidas com 25px de espessura */
+    border-color: transparent transparent #d9d9d9 transparent  ;
+}
 
+.produtos-promocao{
+    display: table;
+    width: 100%;
+}
+
+.produtos-lanches{
+    display: table;
+    width: 100%;
+    margin-top: 20px;
+}
+.produtos-bebidas{
+    display: table;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .overlap-info-lanchonete{
@@ -365,8 +417,8 @@ select, input[type=number] {
 .overlap-info-address{
     color: #aaa;
     font-size: 16px;
-
 }
+
 .info-produtos-lanchonete{
     border: 1px solid #cbcbcb;
     padding: 10px;
@@ -374,13 +426,30 @@ select, input[type=number] {
     height: 70px;
     cursor: pointer;
     margin: 5px 0 0 0;
+    
 }
 .info-produtos-lanchonete:hover {
     background-color: #f1f1f1;
 }
 
 .group-info-produtos{
-float: left;
+    float: left;
+    
+}
+
+.product-name{
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    
+}
+
+
+#product-name{
+    width: 90%;
+    
 }
 
 .product-img img{
@@ -394,6 +463,433 @@ float: left;
     position: absolute;
 }
 
+
+/********************** Pagina Lateral *************************/
+.basketpage{
+    z-index: 9;
+
+}
+.page-side {
+    z-index: 9;
+    background: white;
+    position: fixed;
+    margin-top: -41px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    right: 1px;
+    height: 90%; 
+    animation-name: pageSide;
+    animation-duration: 1s;
+    -webkit-transition: width 2s; /* For Safari 3.1 to 6.0 */
+    transition: transform 2s, width 2s;
+}
+
+.page-side:enabled {
+    transform: translateX(-100px);
+  }
+
+.basket-icon{
+    color: black;
+    position: relative;
+    float: right;
+    right: 5%;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.page-details-item .col-xs-11, .page-details-item .col-sm-8, .page-details-item .col-md-6, 
+.page-details-item .col-lg-4
+
+.page-shoppingBasket .col-xs-11, .page-shoppingBasket .col-sm-8, .page-shoppingBasket .col-md-6, 
+.page-shoppingBasket .col-lg-4{
+    padding: 0 0 0 0;
+}
+.page-shoppingBasket{
+    z-index: 9;
+    
+}
+
+.nav-page-side{
+    padding: 10px 0 10px 10px;
+    background: #620069;
+    color: white;
+    height: 70px;
+    
+}
+
+.page-side-header span{
+    font-size: 18px;
+    font-weight: bold;
+}
+.page-side-header i{
+    
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 10px 0 0; 
+}
+
+.page-side-address{
+    display: inline;
+    color: #aaa;
+    padding: 0 0 0 30px;
+}
+
+.logo-page-side{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 3px solid white;
+    position: absolute;
+    left: 82%;
+    cursor: pointer;
+}
+.table-itens-basket{
+    height: 75%;
+    margin: 30px 0 0 0;
+    display: block;
+    
+}
+
+.product-basket{
+    width: 100%;
+    overflow-y: auto;
+    
+    
+}
+
+.basket-total{
+    width: 100%;
+}
+
+
+.product-basket-total{
+    padding: 0 20px 0 20px;
+
+}
+
+.product-basket-info{
+    border: 1px solid; /* As 4 bordas sólidas com 25px de espessura */
+    border-color: #d9d9d9 transparent #d9d9d9 transparent  ; /* cores: topo, direita, inferior, esquerda */    
+    height: 40px;
+    cursor: pointer;
+}
+
+.product-basket-total{
+    border: 1px solid; /* As 4 bordas sólidas com 25px de espessura */
+    border-color: #d9d9d9 transparent transparent transparent  ; /* cores: topo, direita, inferior, esquerda */    
+    height: 40px;
+    cursor: pointer;
+    border-color: #d9d9d9 transparent transparent transparent;
+}
+
+.product-basket-info:hover{
+    background: rgb(185, 183, 183);
+    color: aliceblue;
+}
+
+#product-basket-name{
+    padding: 0 0 0 10px;
+    
+}
+#basket-label-total{
+    padding: 0 0 0 20px;
+    width: 1px;
+}
+
+#product-basket-quantity{
+    padding: 0 0 0 10px;
+    width: 1px;
+}
+
+#basket-label-total, #basket-price-total{
+    font-size: 15px;
+    font-weight: bold;
+    width: 1px;
+    
+}
+#product-basket-price, #basket-price-total{
+    text-align: right;
+    white-space: nowrap;
+    
+}
+#basket-price-total{
+    padding: 0 40px 0 0;
+    text-align: right;
+}
+
+#product-basket-option{
+    padding: 0 10px 0 10px;
+    width: 1px;
+    cursor: pointer;
+    color: #620069;
+    margin: 8px 0 0 0px;
+}
+
+/*** checkbox **/
+#deliver-label{
+    padding: 0 10px 0 0;
+    margin-top: -4px;
+    position:absolute;
+    right: 40px;
+}
+.deliver{
+    text-align: right;
+    margin: 10px 0 10px 0;
+    position: absolute;
+    white-space: nowrap;
+    right: 10px;
+    
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 16px;
+}
+
+.switch input {display:none;}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: -4px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    text-align: center;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+
+input.primary:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(19px);
+}
+
+.slider.round {
+    border-radius: 16px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/****** tabela cesta *****/
+
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 100%;
+    overflow: auto;
+}
+.table-wrapper-scroll-y {
+    display: block;
+    padding: 0 20px 0 20px;
+}
+::-webkit-scrollbar {
+    width: 12px;
+    display: none;
+}
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+td:nth-child(3){
+    text-align: right;
+}
+td:nth-child(4){
+    width: 20px;
+    text-align: right;
+    
+}
+
+.table-itens-basket tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+.tr:active{
+    background-color: #f1f1f1;
+    
+}
+
+/***** dropdown itens ****/
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdow-itens-basket {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+
+.dropdow-itens-basket a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdow-itens-basket a:hover {background-color: #f1f1f1;}
+
+.dropdown:hover .dropdow-itens-basket {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.p{
+    transform: translateX(100px)
+}
+
+
+/**************************** Detalhe dos items **************/
+.details-item-img{
+    display: inline;
+}
+
+.details-item-img img{
+    margin: 0 auto 0 auto;
+    width: 90%;
+    height: 150px;
+    display: block;
+    position: relative;
+}
+.product-name-details{
+    padding: 10px 20px 0px 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.entrega-details{
+    border: 1px solid rgb(11, 228, 11);
+    color: rgb(11, 228, 11);
+    position: absolute;
+    left: 82%;
+    margin-right: -80%;
+    transform: translate(-30%, -30%);
+    margin-top: 8px;
+    padding: 1px 5px;
+    border-radius: 3px;
+/*  
+    text-decoration: line-through;
+    color: #aaa;
+    border: 1px solid #aaa;
+*/
+
+}
+
+
+.descrition-item{
+    padding: 30px 20px 0px 20px;
+    color: #aaa;
+
+}
+.price-details{
+    padding: 10px 20px 0px 0px;
+    font-size: 20px;
+    color: rgb(11, 228, 11);
+    float: right;
+}
+
+.details-observation{
+    padding: 10px 20px 0px 20px;
+    margin: 25px 0 0 0;
+
+}
+textarea.form-control {
+    height: 60px;
+    white-space: normal;
+    resize: none;
+}
+
+.opcional{
+    font-size: 12px;
+    padding: 0 0 0 5px;
+    color: #aaa;
+}
+
+.field-scrol-details{
+    position: relative;
+    height: 78%;
+    overflow: auto;
+    display: block;
+}
+.quantity-choose *{
+    font-size: 18px;
+    cursor: pointer;
+    padding: 10px 10px 10px 10px;
+
+}
+.btn-add-basket{
+    cursor: pointer;
+    padding: 10px 10px 10px 10px;
+    float: right;
+    font-weight: bold;
+    color: white;
+    background: #620069;
+    
+}
+.quantity-choose, .btn-add-basket{
+    border: 1px rgb(233, 227, 227) solid;
+    display: -webkit-inline-box;
+    border-radius: 5px;
+}
+
+.bar-end-page-details{
+    padding: 10px 20px 10px 20px;
+}
+.fa-plus{
+    color: #620069;
+}
+.btn-add-basket {
+    display: -webkit-inline-box;
+}
+
 /*********************** Media *********************************/
 
 @media (max-width: 480px) {
@@ -403,12 +899,28 @@ float: left;
     }
     .logo{
         margin: 10px 0 0 1% ;
-    
+        
+    }
+    .overlap{
+        height: 98% !important;
+        margin: -100px 0 0 0 !important;
+        top: 104px !important;
+
+    }
+    .page-side {
+      
+        margin-top: -100px;
+        height: 98%; 
     }
     
 }
-
-
+/*
+@media (min-width: 900px) {
+    
+    .product-name{
+        width: 90%;
+    }
+}
 /*********************** Animation ********************************
 
 @keyframes onOverlap {
@@ -419,5 +931,18 @@ float: left;
     from {transform: translateY(0)}
     to {transform: translateY(350px)}
 }
-
 */  
+@keyframes pageSide {
+    from {transform: translateX(350px)}
+    to {transform: translateX(0)}
+}
+
+@keyframes pageSideAlternate {
+    from {transform: translateX(0)}
+    to {transform: translateX(450px)}
+}
+
+@keyframes heartA {
+    from{opacity: 0; font-size: 10px; margin-top: 28px}
+    to{ opacity: 1; font-size: 20px; margin-top: 25px}
+}
