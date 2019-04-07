@@ -8,5 +8,6 @@ namespace ApiAlunos.Repository
         IEnumerable<Aluno> GetAll();
         Aluno Find(string ra);
         Aluno Login(string ra, string senha, string instituicao);
+        Aluno Login (string ra, string senha);
     }
 }

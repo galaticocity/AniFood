@@ -39,9 +39,9 @@ namespace ApiAlunos.Controllers
         */
 
        [HttpPost("login")]
-       public IActionResult Login([FromBody] Aluno oAluno)
+       public IActionResult Login([FromBody] Aluno pAluno)
        {
-           var aluno = _alunoRepository.Login(oAluno.RA, oAluno.Senha, oAluno.Instituicao);
+           var aluno = _alunoRepository.Login(pAluno.RA, pAluno.Senha);
            if(aluno == null)
                 return BadRequest();
             return new ObjectResult(aluno);

@@ -26,5 +26,10 @@ namespace ApiAlunos.Repository
         {
             return _context.Aluno.FirstOrDefault(x => x.RA == ra && x.Senha == senha && x.Instituicao == instituicao );
         }
+
+        public Aluno Login(string ra, string senha)
+        {
+            return _context.Aluno.FirstOrDefault(x => x.RA == ra && x.Senha == senha);
+        }
     }
 }

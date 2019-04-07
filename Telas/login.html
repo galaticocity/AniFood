@@ -25,7 +25,32 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
+    <!-- Login-->
+    <script>
+        function login(){
+            var ra = document.getElementById('inputRa').value;
+            var senha = document.getElementById('inputPassword').value;
 
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('POST', 'https://localhost:5001/apialuno/aluno/login', true);
+            xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded');
+
+            xhr.onload = function(){
+                var result = JSON.parse(this.responseText);
+                console.log(`${result.token_type} ${result.access_token}`);
+                sessionStorage.setItem("token", `${result.token_type} ${result.access_token}`);
+                verifica();
+            }
+
+            xhr.send(`grant_type=password&username=${ra}`)
+        }
+
+        function verifica(){
+            var xhr = new XMLHttpRequest();
+            xhr.open()
+        }
+    </script>
     <title>Login</title>
 
 </head>
