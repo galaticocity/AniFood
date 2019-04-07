@@ -53,9 +53,10 @@
                     data: JSON.stringify(aluno),
                     success: function (data, textStatus, xhr) {
                         console.log(data);
+                        window.location.href = './index.html';
                     },
                     error: function (xhr, textStatus, errorThrow) {
-                        console.log("erro");
+                        alert("Usuário ou senha inválidos");
                     }
                 });
 
