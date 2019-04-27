@@ -18,88 +18,56 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace ApiAniFood
-{
-    public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
+namespace ApiAniFood {
+    public class Startup {
+        public Startup (IConfiguration configuration) {
             Configuration = configuration;
         }
 
         public IConfiguration Configuration { get; }
 
-
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<CategoriaDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
+        public void ConfigureServices (IServiceCollection services) {
+            services.AddDbContext<CategoriaDbContext> (options =>
+                options.UseMySql (Configuration.GetConnectionString ("MySqlConnectionString"))
             );
-            services.AddDbContext<AlunoDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
+            services.AddDbContext<AlunoDbContext> (options =>
+                options.UseMySql (Configuration.GetConnectionString ("MySqlConnectionString"))
             );
-            services.AddDbContext<ProdutoDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
+            services.AddDbContext<ProdutoDbContext> (options =>
+                options.UseMySql (Configuration.GetConnectionString ("MySqlConnectionString"))
             );
 
-            services.AddTransient<ICategoriaRepository, CategoriaRepository>();
-            services.AddTransient<IAlunoRepository, AlunoRepository>();
-            services.AddTransient<IProdutoRepository, ProdutoRepository>();
-            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
+            //services.AddTransient<ICategoriaRepository, CategoriaRepository> ();
+            //services.AddTransient<IAlunoRepository, AlunoRepository> ();
+            services.AddTransient<IProdutoRepository, ProdutoRepository> ();
+            //services.AddTransient<IUsuarioRepository, UsuarioRepository> ();
 
-            //adicionar autenticação token
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuer = true,
-                        ValidateAudience = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        ValidIssuer = "anifood",
-                        ValidAudience = "anifood",
-                        IssuerSigningKey = new SymmetricSecurityKey(
-                            Encoding.UTF8.GetBytes(Configuration["SecurityKey"])
-                        )
-                    };
+            //permite requisições ORIGIN
+            services.AddCors (o => o.AddPolicy ("MyPolicy", builder => {
+                builder
+                    .AllowAnyOrigin ()
+                    .AllowAnyMethod ()
+                    .AllowAnyHeader ()
+                    .AllowCredentials ();
+            }));
 
-                    options.Events = new JwtBearerEvents
-                    {
-                        OnAuthenticationFailed = context =>
-                        {
-                            Console.WriteLine($"Token Inválido [{context.Exception.Message}]");
-                            return Task.CompletedTask;
-                        },
-                        OnTokenValidated = context =>
-                        {
-                            Console.WriteLine($"Token válido [{context.SecurityToken}]");
-                            return Task.CompletedTask;
-                        }
-                    };
-                }
-            );            
-            
-            
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc ().SetCompatibilityVersion (CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseHsts();
+        public void Configure (IApplicationBuilder app, IHostingEnvironment env) {
+            if (env.IsDevelopment ()) {
+                app.UseDeveloperExceptionPage ();
+            } else {
+                app.UseHsts ();
             }
 
-            app.UseAuthentication();
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app.UseCors ("MyPolicy");
+
+            app.UseAuthentication ();
+            app.UseHttpsRedirection ();
+            app.UseMvc ();
         }
     }
 }

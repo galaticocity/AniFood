@@ -1,53 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
-    
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <!-- Bootstrap CSS -->
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    
-    
-    
+
+
+
     <!-- fontawesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+        integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
     <!-- CSS -->
-    
+
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    
-    <title>Hello, world!</title>
+    <script>
+        $(document).ready(function () {
+
+            $('#pesquisa-produto').keyup(function () {
+                var $this = $(this);
+                var valueSearch = $this.val()
+                var pesquisa = new Object();
+                pesquisa.nome = $.trim($('#pesquisa-produto').val());
+
+                if (valueSearch.length >= 1) {
+                    $.ajax({
+                        url: 'https://localhost:5001/anifood/produto/nome/',
+                        type: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        dataType: 'json',
+                        data: JSON.stringify(pesquisa),
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function () {
+                            console.log('erro');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+
+    <title>AniFood</title>
 </head>
 <style>
-    
+
 </style>
+
 <body>
-    
+
     <nav class="navbar">
-        
-        
+
+
         <div class="ProfileUser">
             <img class="logo" src="img/logoRender.png">
-            
+
             <li class="name">
                 <span class="nameProfile">
-                    
-                    Bem-vindo(a), 
-                    
-                    <strong>Thiago<!-- Name -->
+
+                    Bem-vindo(a),
+
+                    <strong>Thiago
+                        <!-- Name -->
                     </strong>
                 </span>
-                
+
                 <span class="profile">
                     <div class="dropdown">
-                        
-                        <img src="https://d1jgln4w9al398.cloudfront.net/site/2.1.238-20181218.39/css/images/sem_foto.png" height="36" width="36" alt="Foto Perfil" title="Foto Perfil">
+
+                        <img src="https://d1jgln4w9al398.cloudfront.net/site/2.1.238-20181218.39/css/images/sem_foto.png"
+                            height="36" width="36" alt="Foto Perfil" title="Foto Perfil">
                         <div class="dropdown-content dropdown-profile">
                             <a class="basket-on" href="#"><i class="fas fa-shopping-basket"></i>Itens na cesta</a>
                             <a id="notification" href="#"><i class="fas fa-bell"></i>Notificações</a>
@@ -56,54 +93,60 @@
                         </div>
                     </div>
                 </span>
-                
-            </div>
-            
-        </nav>
-        <ul id="tabUser" class="tabUser nav nav-tabs">
-            <li class="tabUser-option active col-4" data-toggle="tab" href="#first-tab" ><i class="fas fa-search"></i> Buscar</a></li>
-            <li class="tabUser-option col-4" data-toggle="tab" href="#second-tab"><i class="far fa-heart"></i> Favoritos</a></li> 
-            <li class="tabUser-option col-4" data-toggle="tab" href="#third-tab"><i class="far fa-list-alt"></i> Pedidos</a></li>
-        </ul>
-        
-        <div class="tab-content row justify-content-center">
-            
-            <div id="overlap" class="overlap tab-pane">
-                <img class="nav-desfoque" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
-                <img class="logo-lunch-circle" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
-                <i id="overlap-off" class="overlap-off fas fa-angle-down"></i>
-                <i class="heart-favority fas fa-heart"></i> <!--<i class="fas fa-heart"></i>  (heart solid)-->
-                
-                <div class="overlap-info-lanchonete">
-                    
-                    <div class="overlap-name-header">
-                        <span id="lanchonete-name">Nome da Lanchonete</span>
-                    </div>
-                    <div class="overlap-info-address">
-                        <span id="info-address">Endereço/Andar</span>
-                        <div class="basket-icon basket-on fas fa-shopping-basket"></div>
-                        
-                    </div>
+
+        </div>
+
+    </nav>
+    <ul id="tabUser" class="tabUser nav nav-tabs">
+        <li class="tabUser-option active col-4" data-toggle="tab" href="#first-tab"><i class="fas fa-search"></i>
+            Buscar</a></li>
+        <li class="tabUser-option col-4" data-toggle="tab" href="#second-tab"><i class="far fa-heart"></i> Favoritos</a>
+        </li>
+        <li class="tabUser-option col-4" data-toggle="tab" href="#third-tab"><i class="far fa-list-alt"></i> Pedidos</a>
+        </li>
+    </ul>
+
+    <div class="tab-content row justify-content-center">
+
+        <div id="overlap" class="overlap tab-pane">
+            <img class="nav-desfoque"
+                src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
+            <img class="logo-lunch-circle"
+                src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
+            <i id="overlap-off" class="overlap-off fas fa-angle-down"></i>
+            <i class="heart-favority fas fa-heart"></i>
+            <!--<i class="fas fa-heart"></i>  (heart solid)-->
+
+            <div class="overlap-info-lanchonete">
+
+                <div class="overlap-name-header">
+                    <span id="lanchonete-name">Nome da Lanchonete</span>
                 </div>
-                
-                <div class="produtos-lanchonete">
+                <div class="overlap-info-address">
+                    <span id="info-address">Endereço/Andar</span>
+                    <div class="basket-icon basket-on fas fa-shopping-basket"></div>
+
+                </div>
+            </div>
+
+            <div class="produtos-lanchonete">
                 <div class="produtos-promocao">
                     <div class="legenda">
                         <span id="legPromocao">Promoção</span>
                     </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3" >
+                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete " href="#page-details-item" data-toggle="tab">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name col-">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -111,43 +154,43 @@
                     </div>
                     <div class="teste col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Nome Produto, </span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Nome Produto, </span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
                         </div>
                     </div>
-                    
-                    
+
+
                 </div>
                 <div class="produtos-lanches">
                     <div class="legenda">
@@ -155,42 +198,42 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name col-">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
-                
+
                 <div class="produtos-bebidas">
                     <div class="legenda">
                         <span id="legBebidas">Bebidas</span>
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -198,17 +241,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -216,17 +259,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -234,17 +277,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -252,17 +295,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -270,17 +313,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -288,17 +331,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -306,17 +349,17 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
@@ -324,1246 +367,1327 @@
                     </div>
                     <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
                         <div class="info-produtos-lanchonete ">
-                            
+
                             <div class="group-info-produtos ">
                                 <div class="product-name">
                                     <span id="product-name">Coxinha com catupiri</span>
                                 </div>
-                                
+
                                 <div class="product-price">
                                     <span id="product-price">$$$</span>
                                 </div>
                             </div>
-                            
+
                             <div class="product-img">
                                 <img id="product-img" src="img/coxinha.png">
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
-        
-        
-        <!-- opções do dropDown -->
-        
-        <div class="tab-content">
-            <div id="shoppingBasket" class="tab-pane">
-                <div class="page-shoppingBasket row justify-content-end">
-                    <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4">
-                        
-                        <div class="nav-page-side">
-                            <img class="logo-page-side" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
-                            
-                            <div class="page-side-header">
-                                <i id="basket-off" class="basket-off fas fa-chevron-left"></i><span id="lanchonete-name">Nome Lanchonete</span>
-                            </div>
-                            <div class="page-side-address">
-                                <span id="info-address">Una barro preto / 7º andar</span>
-                            </div>
-                            
+    </div>
+
+
+    <!-- opções do dropDown -->
+
+    <div class="tab-content">
+        <div id="shoppingBasket" class="tab-pane">
+            <div class="page-shoppingBasket row justify-content-end">
+                <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4">
+
+                    <div class="nav-page-side">
+                        <img class="logo-page-side"
+                            src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
+
+                        <div class="page-side-header">
+                            <i id="basket-off" class="basket-off fas fa-chevron-left"></i><span
+                                id="lanchonete-name">Nome Lanchonete</span>
                         </div>
-                        <div class="row justify-content-end">
-                            <div class="deliver">
-                                <span id="deliver-label">Entregar pedido</span>
-                                <label class="switch ">
-                                    <input id="deliver-check" type="checkbox" class="primary">
-                                    <span class="slider round"></span>
-                                </div>
-                            </div>
-                            <div class="table-itens-basket">
-                                
-                                <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                                    
-                                    <table class="table mb-0">
-                                        
-                                        <tbody>
-                                            <tr>
-                                                <th scope="row">1x</th>
-                                                <td>Coxinha com catupiri</td>
-                                                <td>R$ 100,00</td>
-                                                
-                                                <td><div class="dropdown dorpdown-basket">
-                                                    <a class="fas fa-ellipsis-v"></a>
-                                                    <div class="dropdown-content dropdow-itens-basket">
-                                                        <a href="#">Editar item</a>
-                                                        <a href="#">Observação</a>
-                                                        <a href="#">Remover item</a>
-                                                    </div>
+                        <div class="page-side-address">
+                            <span id="info-address">Una barro preto / 7º andar</span>
+                        </div>
+
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="deliver">
+                            <span id="deliver-label">Entregar pedido</span>
+                            <label class="switch ">
+                                <input id="deliver-check" type="checkbox" class="primary">
+                                <span class="slider round"></span>
+                        </div>
+                    </div>
+                    <div class="table-itens-basket">
+
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                            <table class="table mb-0">
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1x</th>
+                                        <td>Coxinha com catupiri</td>
+                                        <td>R$ 100,00</td>
+
+                                        <td>
+                                            <div class="dropdown dorpdown-basket">
+                                                <a class="fas fa-ellipsis-v"></a>
+                                                <div class="dropdown-content dropdow-itens-basket">
+                                                    <a href="#">Editar item</a>
+                                                    <a href="#">Observação</a>
+                                                    <a href="#">Remover item</a>
                                                 </div>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">2x</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">4</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">5</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">6</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td><i class="fas fa-ellipsis-v"></i></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    
+                                            </div>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2x</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td><i class="fas fa-ellipsis-v"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <table class="basket-total">
+                        <tr class="product-basket-total">
+                            <td id="basket-label-total">Total</td>
+                            <td id="basket-price-total">R$ 100,00</td>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="tab-content">
+        <div id="shoppingBasket" class="tab-pane">
+            <div class="page-shoppingBasket row justify-content-end">
+                <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4">
+
+                    <div class="nav-page-side">
+                        <img class="logo-page-side"
+                            src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
+
+                        <div class="page-side-header">
+                            <i id="basket-off" class="basket-off fas fa-chevron-left"></i><span
+                                id="lanchonete-name">Nome Lanchonete</span>
+                        </div>
+                        <div class="page-side-address">
+                            <span id="info-address">Una barro preto / 7º andar</span>
+                        </div>
+
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="deliver">
+                            <span id="deliver-label">Entregar pedido</span>
+                            <label class="switch ">
+                                <input id="deliver-check" type="checkbox" class="primary">
+                                <span class="slider round"></span>
+                        </div>
+                    </div>
+                    <div class="table-itens-basket">
+
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+
+                            <table class="table mb-0">
+
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1x</th>
+                                        <td>Coxinha com catupiri</td>
+                                        <td>R$ 100,00</td>
+
+                                        <td>
+                                            <div class="dropdown dorpdown-basket">
+                                                <a class="fas fa-ellipsis-v"></a>
+                                                <div class="dropdown-content dropdow-itens-basket">
+                                                    <a href="#">Editar item</a>
+                                                    <a href="#">Observação</a>
+                                                    <a href="#">Remover item</a>
+                                                </div>
+                                            </div>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">2x</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">3</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">4</th>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">5</th>
+                                        <td>Jacob</td>
+                                        <td>Thornton</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td>@</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row">6</th>
+                                        <td>Larry</td>
+                                        <td>the Bird</td>
+                                        <td><i class="fas fa-ellipsis-v"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <table class="basket-total">
+                        <tr class="product-basket-total">
+                            <td id="basket-label-total">Total</td>
+                            <td id="basket-price-total">R$ 100,00</td>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detalhe dos items -->
+
+    <div class="tab-content">
+        <div id="page-details-item" class="tab-pane" data-toggle="tab">
+            <div class="page-details-item row justify-content-end">
+                <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4">
+
+                    <div class="nav-page-side">
+                        <img class="logo-page-side"
+                            src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
+
+                        <div class="page-side-header">
+                            <i id="details-off" class="fas fa-chevron-left"></i><span id="lanchonete-name">Nome
+                                Lanchonete</span>
+                        </div>
+                        <div class="page-side-address">
+                            <span id="info-address">Una barro preto / 7º andar</span>
+                        </div>
+
+                    </div>
+
+                    <div class="details-general field-scrol-details ">
+                        <div class="details-item-img">
+                            <img id="product-img" src="img/coxinha.png">
+                        </div>
+                        <div class="product-name-details">
+                            <span id="product-name">Coxinha com catupiri</span>
+                        </div>
+                        <div class="entrega-details">
+                            <span id="label-entrega">Entrega</span>
+                        </div>
+
+
+                        <div class="descrition-item">
+                            <span id="descrition-item">Coxinha com catupiri extra grande, oma omeom om oem ome
+                                masmdoasd moasmdoasmd mmsm m momome okad ekne nenenn nn nn</span>
+                        </div>
+                        <div class="price-details">
+                            <span id="product-price">R$ 30,00</span>
+                        </div>
+                        <div class="details-observation">
+                            <div class="form-group">
+                                <label for="exampleFormControlTextarea1">Observação</label>
+                                <span class="opcional">opcional</span>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="bar-end-page-details">
+                        <div class="quantity-choose">
+                            <i class="fas fa-minus"></i>
+                            <span class="quantity-item">1</span>
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="btn-add-basket">
+                            <span class="label-add">Adicionar</span>
+                            <span class="price-total-add">R$ 30,00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <!-- first-tab -->
+
+        <div class="tab-content">
+            <div id="first-tab" class="tab-pane fade in active">
+                <div class="searchUser">
+                    <!-- mb-2 col-7 col-sm-6 col-md-8 col-lg-5 -->
+
+                    <input id="pesquisa-produto" class="form-control" type="text"
+                        placeholder="Buscar por prato, lanchonete ou campus" aria-label="Search">
+                    <!-- <i class="fas fa-search"></i> -->
+                </div>
+
+
+                <div class="tabs flex-tab justify-content-center">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+
+                        <div class="card-lanchonete" data-toggle="tab" href="#">
+
+                            <div class="row card-container open" href="#">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
                                 </div>
                             </div>
-                            <table class="basket-total">
-                                <tr class="product-basket-total">
-                                    <td id="basket-label-total">Total</td>
-                                    <td id="basket-price-total">R$ 100,00</td>
-                                    
-                                </table>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                
-                
-                <div class="tab-content">
-                    <div id="shoppingBasket" class="tab-pane">
-                        <div class="page-shoppingBasket row justify-content-end">
-                            <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4">
-                                
-                                <div class="nav-page-side">
-                                    <img class="logo-page-side" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
-                                    
-                                    <div class="page-side-header">
-                                        <i id="basket-off" class="basket-off fas fa-chevron-left"></i><span id="lanchonete-name">Nome Lanchonete</span>
-                                    </div>
-                                    <div class="page-side-address">
-                                        <span id="info-address">Una barro preto / 7º andar</span>
-                                    </div>
-                                    
-                                </div>
-                                <div class="row justify-content-end">
-                                    <div class="deliver">
-                                        <span id="deliver-label">Entregar pedido</span>
-                                        <label class="switch ">
-                                            <input id="deliver-check" type="checkbox" class="primary">
-                                            <span class="slider round"></span>
-                                        </div>
-                                    </div>
-                                    <div class="table-itens-basket">
-                                        
-                                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                                            
-                                            <table class="table mb-0">
-                                                
-                                                <tbody>
-                                                    <tr>
-                                                        <th scope="row">1x</th>
-                                                        <td>Coxinha com catupiri</td>
-                                                        <td>R$ 100,00</td>
-                                                        
-                                                        <td><div class="dropdown dorpdown-basket">
-                                                            <a class="fas fa-ellipsis-v"></a>
-                                                            <div class="dropdown-content dropdow-itens-basket">
-                                                                <a href="#">Editar item</a>
-                                                                <a href="#">Observação</a>
-                                                                <a href="#">Remover item</a>
-                                                            </div>
-                                                        </div>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">2x</th>
-                                                        <td>Jacob</td>
-                                                        <td>Thornton</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">3</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">4</th>
-                                                        <td>Mark</td>
-                                                        <td>Otto</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">5</th>
-                                                        <td>Jacob</td>
-                                                        <td>Thornton</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td>@</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th scope="row">6</th>
-                                                        <td>Larry</td>
-                                                        <td>the Bird</td>
-                                                        <td><i class="fas fa-ellipsis-v"></i></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            
-                                        </div>
-                                    </div>
-                                    <table class="basket-total">
-                                        <tr class="product-basket-total">
-                                            <td id="basket-label-total">Total</td>
-                                            <td id="basket-price-total">R$ 100,00</td>
-                                            
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Detalhe dos items -->
-                        
-                        <div class="tab-content">
-                            <div id="page-details-item" class="tab-pane" data-toggle="tab">
-                                <div class="page-details-item row justify-content-end">
-                                    <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4">
-                                        
-                                        <div class="nav-page-side">
-                                            <img class="logo-page-side" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80">
-                                            
-                                            <div class="page-side-header">
-                                                <i id="details-off" class="fas fa-chevron-left"></i><span id="lanchonete-name">Nome Lanchonete</span>
-                                            </div>
-                                            <div class="page-side-address">
-                                                <span id="info-address">Una barro preto / 7º andar</span>
-                                            </div>
-                                            
-                                        </div>
-                                        
-                                        <div class="details-general field-scrol-details ">
-                                            <div class="details-item-img">
-                                                <img id="product-img" src="img/coxinha.png">
-                                            </div>
-                                            <div class="product-name-details">
-                                                <span id="product-name">Coxinha com catupiri</span>
-                                            </div>
-                                            <div class="entrega-details">
-                                                <span id="label-entrega">Entrega</span>
-                                            </div>
+            </div>
 
+            <div id="second-tab" class="tab-pane fade">
+                <div class="tabs flex-tab justify-content-center">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
 
-                                            <div class="descrition-item">
-                                                <span id="descrition-item">Coxinha com catupiri extra grande, oma omeom om oem ome 
-                                                    masmdoasd moasmdoasmd mmsm m momome okad ekne nenenn nn nn</span>
-                                                </div>
-                                                <div class="price-details">
-                                                    <span id="product-price">R$ 30,00</span>
-                                                </div>
-                                                <div class="details-observation">
-                                                    <div class="form-group">
-                                                        <label for="exampleFormControlTextarea1">Observação</label>
-                                                        <span class="opcional">opcional</span>
-                                                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                    </div>   
-                                                </div>
-                                                
-                                                
-                                            </div>
-                                            <div class="bar-end-page-details">
-                                                <div class="quantity-choose">
-                                                    <i class="fas fa-minus"></i>
-                                                    <span class="quantity-item">1</span>
-                                                    <i class="fas fa-plus"></i>
-                                                </div>
-                                            <div class="btn-add-basket"> 
-                                                <span class="label-add">Adicionar</span>
-                                                <span class="price-total-add">R$ 30,00</span>
-                                            </div>
-                                            </div>
-                                        </div>
+                            <div class="row card-container open" href="#overlap">
+
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        <div class="container">
-                            
-                            
-                            <!-- first-tab -->
-                            
-                            <div class="tab-content">
-                                <div id="first-tab" class="tab-pane fade in active">
-                                    <div class="searchUser">
-                                        <!-- mb-2 col-7 col-sm-6 col-md-8 col-lg-5 -->
-                                        
-                                        <input class="form-control" type="text" placeholder="Buscar por prato, lanchonete ou campus" 
-                                        aria-label="Search" >
-                                        
-                                        <!-- <i class="fas fa-search"></i> -->                                     
-                                    </div>
-                                    
-                                    
-                                    <div class="tabs flex-tab justify-content-center" >
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            
-                                            <div class="card-lanchonete" data-toggle="tab" href="#">
-                                                
-                                                <div class="row card-container open" href="#">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>                           
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                        
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    </div>
+
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
                                 </div>
-                                
-                                <div id="second-tab" class="tab-pane fade">
-                                    <div class="tabs flex-tab justify-content-center" >
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
                                     </div>
-                                </div>
-                                
-                                <div id="third-tab" class="tab-pane fade">
-                                    <div class="tabs flex-tab justify-content-center" >
-                                        <div class="col-sm-12 col-md-6 col-lg-4">
-                                            
-                                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-                                                
-                                                <div class="row card-container open" href="#overlap">
-                                                    <div class="wrapper-img">
-                                                        <img class="images" src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80" alt="Smiley face" height="42" width="42">
-                                                    </div>
-                                                    
-                                                    <div class="wrapper-info">
-                                                        <div class="wrapper-info-header">
-                                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-product">
-                                                            <span>Info</span>
-                                                        </div>
-                                                        
-                                                        <div class="wrapper-info-address">
-                                                            <span id="info-address">Endereço/andar</span>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!--
+                    </div>
+                </div>
+            </div>
+
+            <div id="third-tab" class="tab-pane fade">
+                <div class="tabs flex-tab justify-content-center">
+                    <div class="col-sm-12 col-md-6 col-lg-4">
+
+                        <div class="card-lanchonete" data-toggle="tab" href="#overlap">
+
+                            <div class="row card-container open" href="#overlap">
+                                <div class="wrapper-img">
+                                    <img class="images"
+                                        src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                        alt="Smiley face" height="42" width="42">
+                                </div>
+
+                                <div class="wrapper-info">
+                                    <div class="wrapper-info-header">
+                                        <span id="lanchonete-name">Nome Lanchonete</span>
+                                    </div>
+
+                                    <div class="wrapper-info-product">
+                                        <span>Info</span>
+                                    </div>
+
+                                    <div class="wrapper-info-address">
+                                        <span id="info-address">Endereço/andar</span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--
                         <div class="card-footer bg-dark border-success">Footer
                             
                             <Span>Ola mundo</Span>
                         </div>
                         -->
-                        
-                        <script type="text/javascript"> 
-                            $(document).ready(function(){
-                                $('.card-lanchonete').click(function(){
-                                    //mostra div
-                                    $('#overlap').show(500);
-                                    
-                                });
-                                $('#overlap-off').click(function(){
-                                    //oculta div
-                                    $('#overlap').hide(500);
-                                    
-                                });
-                            });                
-                            
-                            
-                            
-                            $(document).ready(function(){
-                                $('.basket-on').click(function(){
-                                    //mostra div
-                                    setTimeout(function() {  $(".page-shoppingBasket > .page-side").css("display", "block"); }, 1);
-                                    $('#shoppingBasket').show();
-                                    
-                                });
-                                $('#basket-off').click(function(){
-                                    //oculta div
-                                    $(".page-shoppingBasket > .page-side").css("animation-name", "pageSideAlternate");
-                                    setTimeout(function() {  $(".page-shoppingBasket > .page-side").css("display", "none"); }, 900);
-                                    setTimeout(function() {  $(".page-shoppingBasket > .page-side").css("animation-name", "pageSide"); }, 999);
-                                    
-                                    
-                                });
-                            });            
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.card-lanchonete').click(function () {
+                //mostra div
+                $('#overlap').show(500);
+
+            });
+            $('#overlap-off').click(function () {
+                //oculta div
+                $('#overlap').hide(500);
+
+            });
+        });
+
+
+
+        $(document).ready(function () {
+            $('.basket-on').click(function () {
+                //mostra div
+                setTimeout(function () { $(".page-shoppingBasket > .page-side").css("display", "block"); }, 1);
+                $('#shoppingBasket').show();
+
+            });
+            $('#basket-off').click(function () {
+                //oculta div
+                $(".page-shoppingBasket > .page-side").css("animation-name", "pageSideAlternate");
+                setTimeout(function () { $(".page-shoppingBasket > .page-side").css("display", "none"); }, 900);
+                setTimeout(function () { $(".page-shoppingBasket > .page-side").css("animation-name", "pageSide"); }, 999);
+
+
+            });
+        });
 
 
 
 
-     
-                            $(document).ready(function(){
-                                $('.info-produtos-lanchonete').click(function(){
-                                    //mostra div
-                                    setTimeout(function() {  $(".page-details-item > .page-side").css("display", "block"); }, 1);
-                                    $('#page-details-item').show();
-                                    
-                                });
-                                $('#details-off').click(function(){
-                                    //oculta div
-                                    $(".page-details-item > .page-side").css("animation-name", "pageSideAlternate");
-                                    setTimeout(function() {  $(".page-details-item > .page-side").css("display", "none"); }, 900);
-                                    setTimeout(function() {  $(".page-details-item > .page-side").css("animation-name", "pageSide"); }, 999);
-                                    
-                                    
-                                });
-                            });            
-                            
-                            
-                            
-                            /* butao + ou - para adicionar na cesta */
-                            $(document).ready(function(){
-                                var qItem = parseInt(document.querySelector('.quantity-item').textContent);
-                                if (qItem<=1){
-                                    $(".fa-minus").css("color", "rgb(199, 190, 190)");
 
-                                }
-                            });
+        $(document).ready(function () {
+            $('.info-produtos-lanchonete').click(function () {
+                //mostra div
+                setTimeout(function () { $(".page-details-item > .page-side").css("display", "block"); }, 1);
+                $('#page-details-item').show();
 
-                            var contadorItem = document.querySelector('.quantity-item');
-                                              
-                            document.querySelector('.fa-minus').addEventListener('click', function(){
-                                var quantityItem = parseInt(contadorItem.textContent) - 1;
-                                if (quantityItem>0){
-                                    $(".fa-minus").css("color", "#620069");
-                                    contadorItem.textContent = quantityItem;
-                                }
-                                if (quantityItem==1) {
-                                    $(".fa-minus").css("color", "rgb(199, 190, 190)");
-
-                                }
-                            });
-                            var contadorItem = document.querySelector('.quantity-item');
-                            
-                            document.querySelector('.fa-plus').addEventListener('click', function(){
-                                var quantityItem = parseInt(contadorItem.textContent) + 1;
-                                contadorItem.textContent = quantityItem;
-                                $(".fa-minus").css("color", "#620069");
-                                
-                            });
-                            
-                            $(document).ready(function(){
-                                $(".heart-favority").click(function(){
-                                    $(".heart-favority").toggleClass("heart-favority-alternate");
-                                });
-                            });
-                            
-                            
-                            
-                            /** posiçao do scroll e tamanho do overlap */
-                            
-                            const execute = function () {
-                                console.log('Cheguei no topo!');
-                                $(".overlap").css("height", "98%");
-                                $(".overlap").css("margin", "-100px 0 0 0");
-                            };
-                            $(window).on('scroll', () => {
-                                if ($(this).scrollTop() >= 100) execute();
-                                else {
-                                $(".overlap").css("height", "90%");
-                                $(".overlap").css("margin", "-41px 0 0 0");
-                                }
-                            });                            
+            });
+            $('#details-off').click(function () {
+                //oculta div
+                $(".page-details-item > .page-side").css("animation-name", "pageSideAlternate");
+                setTimeout(function () { $(".page-details-item > .page-side").css("display", "none"); }, 900);
+                setTimeout(function () { $(".page-details-item > .page-side").css("animation-name", "pageSide"); }, 999);
 
 
-                            
-                            $( "p:even" ).removeClass( "blue" );
+            });
+        });
 
 
 
-                        </script>
-                        
-                    </body>
-                    </html>
+        /* butao + ou - para adicionar na cesta */
+        $(document).ready(function () {
+            var qItem = parseInt(document.querySelector('.quantity-item').textContent);
+            if (qItem <= 1) {
+                $(".fa-minus").css("color", "rgb(199, 190, 190)");
+
+            }
+        });
+
+        var contadorItem = document.querySelector('.quantity-item');
+
+        document.querySelector('.fa-minus').addEventListener('click', function () {
+            var quantityItem = parseInt(contadorItem.textContent) - 1;
+            if (quantityItem > 0) {
+                $(".fa-minus").css("color", "#620069");
+                contadorItem.textContent = quantityItem;
+            }
+            if (quantityItem == 1) {
+                $(".fa-minus").css("color", "rgb(199, 190, 190)");
+
+            }
+        });
+        var contadorItem = document.querySelector('.quantity-item');
+
+        document.querySelector('.fa-plus').addEventListener('click', function () {
+            var quantityItem = parseInt(contadorItem.textContent) + 1;
+            contadorItem.textContent = quantityItem;
+            $(".fa-minus").css("color", "#620069");
+
+        });
+
+        $(document).ready(function () {
+            $(".heart-favority").click(function () {
+                $(".heart-favority").toggleClass("heart-favority-alternate");
+            });
+        });
+
+
+
+        /** posiçao do scroll e tamanho do overlap */
+
+        const execute = function () {
+            console.log('Cheguei no topo!');
+            $(".overlap").css("height", "98%");
+            $(".overlap").css("margin", "-100px 0 0 0");
+        };
+        $(window).on('scroll', () => {
+            if ($(this).scrollTop() >= 100) execute();
+            else {
+                $(".overlap").css("height", "90%");
+                $(".overlap").css("margin", "-41px 0 0 0");
+            }
+        });
+
+
+
+        $("p:even").removeClass("blue");
+
+
+
+    </script>
+
+</body>
+
+</html>
