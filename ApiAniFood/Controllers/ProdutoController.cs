@@ -21,8 +21,8 @@ namespace ApiAniFood.Controllers {
 
         [EnableCors ("MyPolicy")]
         [HttpPost ("nome", Name = "PostProdutoByName")]
-        public IEnumerable<Produto> FindPost([FromBody]Aluno Aluno) {
-            return _produtoRepository.Find (Aluno.Nome);
+        public IEnumerable<Produto> FindPost([FromBody]Aluno aluno) {
+            return _produtoRepository.Find (aluno.Nome);
         }
 
         [EnableCors("MyPolicy")]

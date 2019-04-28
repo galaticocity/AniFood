@@ -37,11 +37,15 @@ namespace ApiAniFood {
             services.AddDbContext<ProdutoDbContext> (options =>
                 options.UseMySql (Configuration.GetConnectionString ("MySqlConnectionString"))
             );
+            services.AddDbContext<LojaDbContext> (options =>
+                options.UseMySql(Configuration.GetConnectionString("MySqlConnectionString"))
+            );
 
-            //services.AddTransient<ICategoriaRepository, CategoriaRepository> ();
-            //services.AddTransient<IAlunoRepository, AlunoRepository> ();
+            services.AddTransient<ICategoriaRepository, CategoriaRepository> ();
+            services.AddTransient<IAlunoRepository, AlunoRepository> ();
             services.AddTransient<IProdutoRepository, ProdutoRepository> ();
-            //services.AddTransient<IUsuarioRepository, UsuarioRepository> ();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository> ();
+            services.AddTransient<ILojaRepository, LojaRepository>();
 
             //permite requisições ORIGIN
             services.AddCors (o => o.AddPolicy ("MyPolicy", builder => {
