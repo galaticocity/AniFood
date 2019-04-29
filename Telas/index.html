@@ -19,6 +19,9 @@
         integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
+
+
+
     <title>AniFood</title>
 </head>
 
@@ -56,14 +59,16 @@
             </nav>
 
             <ul id="tabUser" class="tabUser nav nav-tabs">
-                <li class="tabUser-option active col-4" data-toggle="tab" href="#first-tab"><i
-                        class="fas fa-search"></i>
-                    Buscar</a></li>
-                <li class="tabUser-option col-4" data-toggle="tab" href="#second-tab"><i class="far fa-heart"></i>
-                    Favoritos</a>
+                <li class="tabUser-option active col-4" data-toggle="tab"><i class="fas fa-search"></i>
+                    <router-link :to="{name: 'buscar'}" class="router-link" style="display: inline">Buscar</router-link>
                 </li>
-                <li class="tabUser-option col-4" data-toggle="tab" href="#third-tab"><i class="far fa-list-alt"></i>
-                    Pedidos</a>
+                <li class="tabUser-option col-4" data-toggle="tab"><i class="far fa-heart"></i>
+                    <router-link :to="{name: 'favoritos'}" class="router-link" style="display: inline">Favoritos
+                    </router-link>
+                </li>
+                <li class="tabUser-option col-4" data-toggle="tab"><i class="far fa-list-alt"></i>
+                    <router-link :to="{name: 'pedidos'}" class="router-link" style="display: inline">Pedidos
+                    </router-link>
                 </li>
             </ul>
 
@@ -90,30 +95,6 @@
                     </div>
 
                     <div class="produtos-lanchonete">
-                        <div class="produtos-promocao">
-                            <div class="legenda">
-                                <span id="legPromocao">Promoção</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                <div class="info-produtos-lanchonete " href="#page-details-item" data-toggle="tab">
-
-                                    <div class="group-info-produtos ">
-                                        <div class="product-name col-">
-                                            <span id="product-name">Coxinha com catupiri</span>
-                                        </div>
-
-                                        <div class="product-price">
-                                            <span id="product-price">$$$</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-img">
-                                        <img id="product-img" src="img/coxinha.png">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                         <div class="produtos-lanches">
                             <div class="legenda">
                                 <span id="legLanches">Lanches</span>
@@ -138,31 +119,6 @@
                             </div>
 
                         </div>
-
-                        <div class="produtos-bebidas">
-                            <div class="legenda">
-                                <span id="legBebidas">Bebidas</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                                <div class="info-produtos-lanchonete ">
-
-                                    <div class="group-info-produtos ">
-                                        <div class="product-name">
-                                            <span id="product-name">Coxinha com catupiri</span>
-                                        </div>
-
-                                        <div class="product-price">
-                                            <span id="product-price">$$$</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-img">
-                                        <img id="product-img" src="img/coxinha.png">
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
                     </div>
                 </div>
             </div>
@@ -171,7 +127,7 @@
             <div class="tab-content">
                 <div id="shoppingBasket" class="tab-pane">
                     <div class="page-shoppingBasket row justify-content-end">
-                        <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4" >
+                        <div class="page-side col-xs-11 col-sm-8 col-md-6 col-lg-4">
 
                             <div class="nav-page-side">
                                 <img class="logo-page-side"
@@ -497,6 +453,10 @@
             </div>
         </div>
 
+        <router-view></router-view>
+    </div>
+
+    <template id="template-produtos">
         <div class="container">
             <!-- first-tab -->
 
@@ -515,9 +475,9 @@
                     <div class="tabs flex-tab justify-content-center">
                         <div class="col-sm-12 col-md-6 col-lg-4" v-for="produto in produtos">
 
-                            <div class="card-lanchonete" data-toggle="tab" href="#">
+                            <div class="card-lanchonete" data-toggle="tab" @click="isHidden = true">
 
-                                <div class="row card-container open" href="#">
+                                <div class="row card-container open" @click="isHidden = true">
                                     <div class="wrapper-img">
                                         <img class="images"
                                             src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
@@ -543,75 +503,76 @@
                     </div>
                 </div>
 
-                <div id="second-tab" class="tab-pane fade">
-                    <div class="tabs flex-tab justify-content-center">
-                        <div class="col-sm-12 col-md-6 col-lg-4">
-                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
 
-                                <div class="row card-container open" href="#overlap">
 
-                                    <div class="wrapper-img">
-                                        <img class="images"
-                                            src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                                            alt="Smiley face" height="42" width="42">
-                                    </div>
+            </div>
+        </div>
+    </template>
 
-                                    <div class="wrapper-info">
-                                        <div class="wrapper-info-header">
-                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                        </div>
+    <template id="template-favoritos">
+        <div class="tabs flex-tab justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-4">
 
-                                        <div class="wrapper-info-product">
-                                            <span>Info</span>
-                                        </div>
+                <div class="card-lanchonete" data-toggle="tab">
 
-                                        <div class="wrapper-info-address">
-                                            <span id="info-address">Endereço/andar</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row card-container open">
+                        <div class="wrapper-img">
+                            <img class="images"
+                                src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                alt="Smiley face" height="42" width="42">
                         </div>
 
-                    </div>
-                </div>
+                        <div class="wrapper-info">
+                            <div class="wrapper-info-header">
+                                <span id="lanchonete-name"> Lanchonete </span>
+                            </div>
 
-                <div id="third-tab" class="tab-pane fade">
-                    <div class="tabs flex-tab justify-content-center">
-                        <div class="col-sm-12 col-md-6 col-lg-4">
+                            <div class="wrapper-info-product">
+                                <span> Informações </span>
+                            </div>
 
-                            <div class="card-lanchonete" data-toggle="tab" href="#overlap">
-
-                                <div class="row card-container open" href="#overlap">
-                                    <div class="wrapper-img">
-                                        <img class="images"
-                                            src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                                            alt="Smiley face" height="42" width="42">
-                                    </div>
-
-                                    <div class="wrapper-info">
-                                        <div class="wrapper-info-header">
-                                            <span id="lanchonete-name">Nome Lanchonete</span>
-                                        </div>
-
-                                        <div class="wrapper-info-product">
-                                            <span>Info</span>
-                                        </div>
-
-                                        <div class="wrapper-info-address">
-                                            <span id="info-address">Endereço/andar</span>
-                                        </div>
-
-                                    </div>
-                                </div>
+                            <div class="wrapper-info-address">
+                                <span id="info-address">Campus</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </template>
 
-    </div>
+    <template id="template-pedidos">
+        <div class="tabs flex-tab justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+
+                <div class="card-lanchonete" data-toggle="tab">
+
+                    <div class="row card-container open">
+                        <div class="wrapper-img">
+                            <img class="images"
+                                src="https://images.unsplash.com/photo-1507783548227-544c3b8fc065?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                                alt="Smiley face" height="42" width="42">
+                        </div>
+
+                        <div class="wrapper-info">
+                            <div class="wrapper-info-header">
+                                <span id="lanchonete-name"> Lanchonete </span>
+                            </div>
+
+                            <div class="wrapper-info-product">
+                                <span> Informações </span>
+                            </div>
+
+                            <div class="wrapper-info-address">
+                                <span id="info-address">Campus</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.card-lanchonete').click(function () {
@@ -626,8 +587,6 @@
             });
         });
 
-
-
         $(document).ready(function () {
             $('.basket-on').click(function () {
                 //mostra div
@@ -640,14 +599,8 @@
                 $(".page-shoppingBasket > .page-side").css("animation-name", "pageSideAlternate");
                 setTimeout(function () { $(".page-shoppingBasket > .page-side").css("display", "none"); }, 900);
                 setTimeout(function () { $(".page-shoppingBasket > .page-side").css("animation-name", "pageSide"); }, 999);
-
-
             });
         });
-
-
-
-
 
         $(document).ready(function () {
             $('.info-produtos-lanchonete').click(function () {
@@ -729,10 +682,56 @@
 
 
     </script>
+
+    <!-- Vue configurations-->
     <script src="https://unpkg.com/vue"></script> <!-- baixar vue-->
     <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script>
         //vue scripts
+        var TemplatePedidos = Vue.component('template-pedidos', {
+            template: "#template-pedidos"
+        });
+
+        var TemplateFavoritos = Vue.component('template-favoritos', {
+            template: "#template-favoritos"
+        });
+
+        var TemplateProdutos = Vue.component('template-produtos', {
+            template: "#template-produtos",
+            data() {
+                return {
+                    pesquisaProduto: '',
+                    produtos: [],
+                    isHidden: false
+                }
+            },
+            methods: {
+                pesquisarPodutos() {
+                    var url = "http://localhost:5000/anifood/loja/nome";
+                    this.$http.post(url, {
+                        nome: this.pesquisaProduto
+                    }).then(function (response) {
+                        this.produtos = response.body;
+                        console.log(response.body)
+                    }, function (error) {
+                        this.response.status = "error",
+                            console.log(error)
+                    })
+                },
+
+            }
+        });
+
+        var router = new VueRouter({
+            //mode: history,
+            routes: [
+                { path: '/produtos', name: 'buscar', component: TemplateProdutos },
+                { path: '/favoritos', name: 'favoritos', component: TemplateFavoritos },
+                { path: '/pedidos', name: 'pedidos', component: TemplatePedidos },
+            ]
+        });
+
         var mixin = {
             methods: {
                 pesquisarPodutos() {
@@ -746,17 +745,22 @@
                         this.response.status = "error",
                             console.log(error)
                     })
+                },
+
+                mostrarProdutosLanchonete: function (event) {
+                    console.log('mostrarProdutosLanchonete');
                 }
             }
         }
+
         var app = new Vue({
             el: '#app',
             mixins: [mixin],
-            data: {
-                pesquisaProduto: '',
-                produtos: []
-            }
+            router
+
         });
+
+
 
     </script>
 
